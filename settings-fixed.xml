@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <!-- 本地仓库路径 -->
+  <localRepository>D:\maven_1\apache-maven-3.6.1-bin\apache-maven-3.6.1\maven-repo</localRepository>
+
+  <!-- 插件组（默认即可） -->
+  <pluginGroups>
+  </pluginGroups>
+
+  <!-- 代理（无需修改） -->
+  <proxies>
+  </proxies>
+
+  <!-- 服务器认证（无需修改） -->
+  <servers>
+  </servers>
+
+  <!-- 镜像配置 -->
+  <mirrors>
+    <!-- 阿里云中央仓库（排除Spring官方仓库） -->
+    <mirror>
+      <id>aliyunmaven</id>
+      <!-- !spring-milestones,!spring-release 表示这两个仓库不走阿里云镜像 -->
+      <mirrorOf>*,!spring-milestones,!spring-release</mirrorOf>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+
+    <!-- Spring Milestones镜像 -->
+    <mirror>
+      <id>spring-milestones-mirror</id>
+      <mirrorOf>spring-milestones</mirrorOf>
+      <url>https://repo.spring.io/milestone</url>
+    </mirror>
+
+    <!-- Spring Release镜像 -->
+    <mirror>
+      <id>spring-release-mirror</id>
+      <mirrorOf>spring-release</mirrorOf>
+      <url>https://repo.spring.io/release</url>
+    </mirror>
+  </mirrors>
+
+  <!-- Spring仓库配置 -->
+  <profiles>
+    <profile>
+      <id>spring-repos-active</id>
+      <!-- 强制激活该配置 -->
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <!-- Spring里程碑仓库 -->
+        <repository>
+          <id>spring-milestones</id>
+          <name>Spring Milestones</name>
+          <url>https://repo.spring.io/milestone</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <!-- Spring正式仓库 -->
+        <repository>
+          <id>spring-release</id>
+          <name>Spring Release Repository</name>
+          <url>https://repo.spring.io/release</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <!-- 阿里云仓库 -->
+        <repository>
+          <id>aliyun-central</id>
+          <url>https://maven.aliyun.com/repository/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <!-- 插件仓库配置 -->
+      <pluginRepositories>
+        <pluginRepository>
+          <id>spring-plugin-milestones</id>
+          <url>https://repo.spring.io/milestone</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+          <id>aliyun-plugin</id>
+          <url>https://maven.aliyun.com/repository/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <!-- 激活Spring仓库配置 -->
+  <activeProfiles>
+    <activeProfile>spring-repos-active</activeProfile>
+  </activeProfiles>
+
+</settings>

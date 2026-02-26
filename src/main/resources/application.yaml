@@ -1,0 +1,44 @@
+# 项目配置
+spring:
+  # 应用配置
+  application:
+    name: my-ai-project
+  
+  # AI 配置
+  ai:
+    # Ollama 配置
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        model: ${OLLAMA_MODEL:deepseek-r1:7b}
+    
+    # OpenAI 配置
+    openai:
+      base-url: ${OPENAI_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode}
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: ${OPENAI_CHAT_MODEL:qwen-max-latest}
+      embedding:
+        options:
+          model: ${OPENAI_EMBEDDING_MODEL:text-embedding-v3}
+          dimensions: ${OPENAI_EMBEDDING_DIMENSIONS:1024}
+  
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3306/ai_assistant?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false}
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:MySQL123}
+
+# 日志配置
+logging:
+  level:
+    org.springframework.ai: ${LOG_LEVEL_AI:debug}
+    com.myai.project: ${LOG_LEVEL_APP:debug}
+  
+# 服务器配置
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/}
